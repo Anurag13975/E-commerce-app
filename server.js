@@ -1,12 +1,21 @@
 import express from 'express';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
+import morgan from 'morgan';
+import connectDB from './config/db.js';
 
-dotenv.config()
+dotenv.config();
+
+// connect mongoDB
+connectDB();
 
 const app = express();
 
+// middlewares
+app.use(express.json()); // to send json data in req,res
+app.use(morgan('dev'));
+
 app.get('/', (req, res) => {
-  res.send("<h1>Welcome to e-coomerce app project</h1>");
+  res.send('<h1>Welcome to e-coomerce app project</h1>');
 });
 
 const PORT = process.env.PORT || 8080;
